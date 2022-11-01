@@ -6,8 +6,6 @@ import { GalleryList } from './ImageGallery.styled';
 import { Loader } from 'components/Loader/Loader';
 import { Button } from '../Button/Button';
 import Fetch from '../../servises/index';
-// axios.defaults.baseURL = 'https://pixabay.com/api/';
-// const AUTH_KEY = '30362684-6931a6e7ba0508128f5876ff1';
 
 export class ImageGallery extends Component {
   state = {
@@ -38,16 +36,6 @@ export class ImageGallery extends Component {
   getPhotos = async () => {
     this.setState({ isLoading: true });
     try {
-      // const response = await axios.get(``, {
-      //   params: {
-      //     q: this.props.request,
-      //     page: this.state.page,
-      //     key: AUTH_KEY,
-      //     image_type: 'photo',
-      //     orientation: 'horizontal',
-      //     per_page: 12,
-      //   },
-      // });
       const response = await Fetch(this.props.request, this.state.page);
       if (this.state.page === 1) {
         this.setState({

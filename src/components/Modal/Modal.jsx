@@ -7,12 +7,17 @@ import { Loader } from 'components/Loader/Loader';
 const modalRoot = document.querySelector('#modal-root');
 
 export class Modal extends Component {
+  state = {
+    isImgLoad: false,
+  };
+
   componentDidMount() {
     window.addEventListener('keydown', this.onModalClose);
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.onModalClose);
+    this.setState({ isImgLoad: false });
   }
 
   onModalClose = e => {
@@ -21,14 +26,19 @@ export class Modal extends Component {
     }
   };
 
+  onImgload = () => {
+    this.setState({ isImgLoad: true });
+  };
+
   render() {
     const { src, name } = this.props;
+    const { isImgLoad } = this.state;
 
     return createPortal(
       <Overlay onClick={this.onModalClose}>
         <ModalWindow>
-          <Loader />
-          <img src={src} alt={name} />
+          {!isImgLoad && <Loader />}
+          <img src={src} alt={name} onLoad={this.onImgload} />
         </ModalWindow>
       </Overlay>,
       modalRoot

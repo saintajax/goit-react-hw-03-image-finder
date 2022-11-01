@@ -9,7 +9,7 @@ export class App extends Component {
   };
 
   handleSerachFormSubmit = request => {
-    this.setState({ ...request });
+    this.setState(request);
   };
 
   render() {
